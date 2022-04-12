@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use LDAP\Result;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +40,12 @@ Route::get('/contact/all/{id}/update', [ContactController::class, 'updateMessage
 Route::post('/contact/all/{id}/update', [ContactController::class, 'updateMessageSubmit'])->name('contact-update-submit');
 
 Route::get('/contact/all/{id}/deletw', [ContactController::class, 'deleteMessage'])->name('contact-delete');
+
+Route::name('user.')->group(function(){
+    Route::get('/private', [AuthController::class, 'showPrivatePage'])->middleware('auth')->name('private');
+    Route::get('/login-form', [AuthController::class, 'showLoginForm'])->name('login-form');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/registration-form', [RegistrationController::class, 'showRegistrationForm'])->name('registration-form');
+    Route::post('/registration', [RegistrationController::class, 'addUser'])->name('registration');
+});
