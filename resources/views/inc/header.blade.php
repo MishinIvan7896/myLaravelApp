@@ -17,8 +17,12 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+        @if (Auth::check())
+        <a href="{{route('user.logout')}}"><button type="button" class="btn btn-outline-light me-2">Выйти</button><a>
+        @else
+          <a href="{{route('user.login-form')}}"><button type="button" class="btn btn-outline-light me-2">Войти</button><a>
+        @endif    
+          <a href="{{route('user.registration-form')}}"><button type="button" class="btn btn-warning">Регистрация</button></a>
         </div>
       </div>
     </div>
