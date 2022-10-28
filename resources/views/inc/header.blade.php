@@ -17,13 +17,15 @@
         </form>
 
         <div class="text-end">
-        @if (Auth::check())
+        @auth
         <a href="{{route('user.logout')}}"><button type="button" class="btn btn-outline-light me-2">Выйти</button><a>
-        @else
+        @endauth
+        @guest
           <a href="{{route('user.login-form')}}"><button type="button" class="btn btn-outline-light me-2">Войти</button><a>
-        @endif    
-          <a href="{{route('user.registration-form')}}"><button type="button" class="btn btn-warning">Регистрация</button></a>
+          @endguest   
+        <a href="{{route('user.registration-form')}}"><button type="button" class="btn btn-warning">Регистрация</button></a>
         </div>
       </div>
     </div>
   </header>
+  <?php print_r(Session::all())?>

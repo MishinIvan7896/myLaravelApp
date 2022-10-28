@@ -5,6 +5,7 @@ use LDAP\Result;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,7 @@ use App\Http\Controllers\RegistrationController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [BlogController::class, 'showAll'])->name('home');
 
 Route::get('/about', function () {
     return view('about');
@@ -49,3 +48,7 @@ Route::name('user.')->group(function(){
     Route::get('/registration-form', [RegistrationController::class, 'showRegistrationForm'])->name('registration-form');
     Route::post('/registration', [RegistrationController::class, 'addUser'])->name('registration');
 });
+
+Route::get('/blog/{id}',[BlogController::class, 'show'])->name('article');
+Route::get('/blog/create',[BlogController::class, 'showCreateForm'])->name('create-form');
+Route::post('/blog/create',[BlogController::class, 'save'])->name('save-article');

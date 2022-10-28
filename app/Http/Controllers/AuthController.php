@@ -20,6 +20,10 @@ class AuthController extends Controller
         if(Auth::attempt($formFields)){
             return redirect()->intended('/');
         }
+
+        return redirect(route('user.login-form'))->withErrors([
+            'email'=>'Неудалось войти'
+        ]);
     }
 
     public function logout(){

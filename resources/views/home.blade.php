@@ -4,6 +4,7 @@
 
 @section('content')
 <h1>Главная страница</h1>
+@include('inc.blog')
 @endsection
 
 @section('aside')
